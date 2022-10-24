@@ -14,6 +14,7 @@ class ArtSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // creates 50 different values
+        Team::factory()->times(50)->create();
     }
 }
