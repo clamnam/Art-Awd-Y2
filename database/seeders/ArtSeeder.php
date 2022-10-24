@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Art;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +15,6 @@ class ArtSeeder extends Seeder
     public function run()
     {
         // creates 50 different values
-        Team::factory()->times(50)->create();
+        Art::factory()->times(50)->create();
     }
 }
