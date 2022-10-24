@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('art', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->integer('genre_id');
             $table->timestamps();
         });
     }
