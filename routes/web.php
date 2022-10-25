@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('/arts',ArtController::class)->middleware(['auth']);
+Route::resource('/art',ArtController::class)->middleware(['auth']);
