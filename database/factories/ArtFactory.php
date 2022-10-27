@@ -19,9 +19,11 @@ class ArtFactory extends Factory
         return [
             //
             'title' =>$this->faker->word,
-            'user_id' => 1,
-            'description' => $this->faker->text(200)
-            
+            'description' => $this->faker->text(200),
+            'artist' => $this->faker->text(20),
+            'genre_id' => $this->faker->text(11)
+
+
         ];
     }
 }
