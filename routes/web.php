@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ArtController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::resource('/art',ArtController::class)->middleware(['auth']);
+
+Route::resource('/arts',ArtController::class)->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

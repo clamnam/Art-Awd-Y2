@@ -30,7 +30,7 @@
             </div>
         @endif
 
-        <h1 class="text-5xl">My Arts</h1>
+        <h1 class="text-5xl text-blue-600">My Arts</h1>
          {{-- <div><img src="{{ URL::asset('image/Tess_the_TickTock_Dog.jpg') }} "style="height: 512px; width: 380px;"> </div> --}}
 
     </div>

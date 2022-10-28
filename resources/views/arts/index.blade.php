@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Notes') }}
+            {{ __('Arts') }}
         </h2>
     </x-slot>
 
@@ -18,9 +18,8 @@
                     <a href="{{ route('arts.show', $art) }}">{{ $art->title }}</a>
                     </h2>
                     <p class="mt-2">
-                        {{ $art->category }}
-                        {{$art->author}}
-                        {{$art->description}}
+                        {{ $art->description}}
+
 
                     </p>
 
@@ -28,8 +27,7 @@
             @empty
             <p>No Arts</p>
             @endforelse
-            <!-- This line of code simply adds the links for Pagination-->
-            {{$arts->links()}}
+
         </div>
     </div>
 </x-app-layout>

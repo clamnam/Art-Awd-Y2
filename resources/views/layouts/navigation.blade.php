@@ -63,8 +63,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('/art')" :active="request()->routeIs('/art')">
-                {{ __('/art') }}
+            <x-responsive-nav-link :href="route('arts.index')" :active="request()->routeIs('arts.index')">
+                {{ __('arts.index') }}
             </x-responsive-nav-link>
         </div>
 
