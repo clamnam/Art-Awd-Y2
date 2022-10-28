@@ -21,7 +21,7 @@ class ArtFactory extends Factory
             'title' =>$this->faker->word,
             'description' => $this->faker->text(200),
             'artist' => $this->faker->text(20),
-            'genre_id' => $this->faker->text(11)
+            'genre' => $this->faker->text(11)
 
 
         ];
