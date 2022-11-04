@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Arts') }}
+            {{ __('Art') }}
         </h2>
     </x-slot>
 
@@ -19,14 +19,16 @@
                     </h2>
                     <p class="mt-2">
                         {{ $art->description}}
-
+                        {{ $art->artist}}
+                        {{ $art->genre}}
 
                     </p>
 
                 </div>
             @empty
-            <p>No Arts</p>
+            <p>No Art</p>
             @endforelse
+            {{ $arts->links() }}
 
         </div>
     </div>

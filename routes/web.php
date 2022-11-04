@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
 //Route::resource('/art',ArtController::class)->middleware(['auth']);
 
 Route::resource('/arts',ArtController::class)->middleware(['auth']);

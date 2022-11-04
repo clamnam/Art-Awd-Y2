@@ -15,12 +15,17 @@ class ArtController extends Controller
      */
     public function index()
     {
+        ////////////// Auth::id()v removed
+        $arts = Art::orderBy('id', 'asc')->paginate(5);
+        return view('arts.index')->with('arts', $arts);
+    // $arts->each(function($art){
+    //     dump($art->title);
 
-    //Fetch arts in order of when they were last updated - latest update returned first
-    $arts = Art::all();
+    // $arts = Art::all();
     // dd($arts);
-    return view('arts.index')->with('arts',$arts);
-    }
+    // return view('arts.index')->with('arts',$arts);
+    // });
+}
 
     /**
      * Show the form for creating a new resource.
