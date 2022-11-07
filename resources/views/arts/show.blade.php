@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,24 +12,32 @@
             </div>
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                    <h2 class=" font-bold text-4xl"> {{ $art->title}}</h2>
 
+                    <h2 class=" font-bold text-4xl"> {{ $art->title }}</h2>
                     <p class="mt-2">
-                        {{ $art->description}}
+                        {{ $art->description }}
                         <br>
-                        {{ $art->artist}}
+                        {{ $art->artist }}
 
-                        {{ $art->genre}}
-
-
+                        {{ $art->genre }}
                     </p>
 
-<p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>
 
+                    <p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>
+                    <div class="">
+                    <tr>
+                        <td rowspan="6">
+                            <img src="{{asset('storage/images/' . $art->art_image)  }}" width="150" alt="">
+                        </td>
+                    </tr>
+                </div>
                 </div>
 
+
+            </div>
+            <a class="items-end btn-link" href="{{ route('arts.edit', $art) }}" >Edit art</a>
+
+            <p class="opacity-70 ml-8"><strong>Created: </strong> {{ $art->created_at->diffForHumans() }}</p>
+            <p class="opacity-70 ml-8"><strong>Updated at: </strong> {{ $art->updated_at->diffForHumans() }}</p>
         </div>
-        <p class="opacity-70 ml-8"><strong>Created: </strong> {{ $art->created_at->diffForHumans() }}</p>
-        <p class="opacity-70 ml-8"><strong>Updated at: </strong> {{ $art->updated_at->diffForHumans() }}</p>
-    </div>
 </x-app-layout>

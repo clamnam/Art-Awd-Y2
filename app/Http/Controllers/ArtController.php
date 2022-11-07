@@ -20,14 +20,14 @@ class ArtController extends Controller
         ////////////// Auth::id()v removed
         $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('arts.index')->with('arts', $arts);
-    // $arts->each(function($art){
-    //     dump($art->title);
+        // $arts->each(function($art){
+        //     dump($art->title);
 
-    // $arts = Art::all();
-    // dd($arts);
-    // return view('arts.index')->with('arts',$arts);
-    // });
-}
+        // $arts = Art::all();
+        // dd($arts);
+        // return view('arts.index')->with('arts',$arts);
+        // });
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -47,21 +47,31 @@ class ArtController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-        'title' => 'required|max:120',
-        'description' => 'required',
-        'genre' => 'required',
-        'artist' => 'required'
+            'title' => 'required|max:120',
+            'description' => 'required',
+            'genre' => 'required',
+            'artist' => 'required',
+            'art_image' => 'file|image'
         ]);
 
+        $art_image = $request->file('art_image');
+        $extension = $art_image->getClientOriginalExtension();
+        //the filename needs to be unique
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        $path = $art_image->storeAs('public/images', $filename);
 
-       art::create([
+
+
+        Art::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
-            'title'=> $request->title,
-            'description' =>$request->description,
+            'title' => $request->title,
+            'description' => $request->description,
             'genre' => $request->genre,
             'artist' => $request->artist,
+           'art_image' => $filename
 
 
         ]);
@@ -77,7 +87,7 @@ class ArtController extends Controller
      */
     public function show(Art $art)
     {
-        if ($art->user_id != Auth::id()){
+        if ($art->user_id != Auth::id()) {
             return abort(403);
         }
         return view('arts.show')->with('art', $art);
@@ -88,8 +98,46 @@ class ArtController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Art $art)
     {
+        if ($art->user_id != Auth::id()) {
+            return abort(403);
+        }
+        return view('arts.edit')->with('art', $art);
         //
     }
+    public function update(Request $request,Art $art)
+    {
+        if ($art->user_id != Auth::id()) {
+            return abort(403);
+        }
+        $request->validate([
+            'title' => 'required|max:120',
+            'description' => 'required',
+            'genre' => 'required',
+            'artist' => 'required',
+            'art_image' => 'required'
+        ]);
+        $art_image = $request->file('art_image');
+        //the filename needs to be unique
+        $extension = $art_image->getClientOriginalExtension();
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $path = $art_image->storeAs('public/images', $filename);
+
+        $art->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'genre' => $request->genre,
+            'artist' => $request->artist,
+            'art_image' => $filename
+               ]);
+
+        return to_route('arts.show',$art);
+
+    }
+
+
+    public function destroy($id)
+    {}
+
 }

@@ -31,7 +31,6 @@
         @endif
 
         <h1 class=" text-white ">My Arts</h1>
-         {{-- <div><img src="{{ URL::asset('image/Tess_the_TickTock_Dog.jpg') }} "style="height: 512px; width: 380px;"> </div> --}}
 
     </div>
 </body>

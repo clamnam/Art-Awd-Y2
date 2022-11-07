@@ -12,7 +12,7 @@
 
 
 
-            <a href="{{ route('arts.create') }}" class=" mt-6">Add an art piece</a>
+            <a href="{{ route('arts.create') }}" class="btn-lg btn-link mt-6">Add an art piece</a>
 
 
             <x-alert-success>

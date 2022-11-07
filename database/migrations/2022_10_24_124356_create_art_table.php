@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('genre');
             $table->string('artist');
+            $table->string('art_image');
             $table->timestamps();
         });
     }
