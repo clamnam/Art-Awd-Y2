@@ -17,7 +17,7 @@ class ArtFactory extends Factory
     public function definition()
     {
         return [
-            //
+            //Factory is used to create fake data using the model through faker
             'title' =>$this->faker->word,
             'description' => $this->faker->text(200),
             'artist' => $this->faker->text(20),

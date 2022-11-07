@@ -31,6 +31,7 @@
 
                     <p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>
                     <div class="">
+                        {{-- brings images in using file names stored in the db, that are stored in the path in asset --}}
                     <tr>
                         <td rowspan="6">
                             <img src="{{asset('storage/images/' . $art->art_image)  }}" width="150" alt="">
@@ -45,8 +46,11 @@
             <form action="{{ route('arts.destroy', $art) }}" method="post">
                 @method('delete')
             @csrf
+            {{-- Allows you to delete with an "are you sure?" prompt --}}
             <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you wish to delete this note?')">Delete piece</button>
         </form>
+                            {{-- diff for humans changes the db format of date to a more readable format --}}
+
             <p class="opacity-70 ml-8"><strong>Created: </strong> {{ $art->created_at->diffForHumans() }}</p>
             <p class="opacity-70 ml-8"><strong>Updated at: </strong> {{ $art->updated_at->diffForHumans() }}</p>
         </div>

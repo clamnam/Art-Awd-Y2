@@ -7,7 +7,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-
+         {{-- form that takes in data and through store function in ArtController inserts the data into the database --}}
+            {{-- enctype is a method of encrypting the form data --}}
             <form action="{{ route('arts.update', $art) }}" method="post" enctype="multipart/form-data">
                 @method('put')
                 @csrf

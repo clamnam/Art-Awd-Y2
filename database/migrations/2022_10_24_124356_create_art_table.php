@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        // fields entered for migration
         Schema::create('art', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');

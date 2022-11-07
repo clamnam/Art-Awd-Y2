@@ -1,7 +1,9 @@
+ /* stylings entirely through tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer components {
+    /* stylings created using ordinary css and tailwind */
     .btn-link {
         @apply inline-block px-4 py-2 bg-indigo-700 rounded-md font-bold text-sm text-white uppercase tracking-widest hover:bg-indigo-800 active:bg-indigo-900 focus:ring ring-indigo-300;
     }

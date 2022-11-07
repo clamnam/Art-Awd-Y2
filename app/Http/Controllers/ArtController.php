@@ -17,9 +17,10 @@ class ArtController extends Controller
      */
     public function index()
     {
-        ////////////// Auth::id()v removed
+        // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('arts.index')->with('arts', $arts);
+        //
         // $arts->each(function($art){
         //     dump($art->title);
 
@@ -47,7 +48,7 @@ class ArtController extends Controller
      */
     public function store(Request $request)
     {
-
+        //makes each field required, if it does not the form will fail
         $request->validate([
             'title' => 'required|max:120',
             'description' => 'required',
@@ -55,15 +56,14 @@ class ArtController extends Controller
             'artist' => 'required',
             'art_image' => 'file|image'
         ]);
-
+        //images
         $art_image = $request->file('art_image');
         $extension = $art_image->getClientOriginalExtension();
-        //the filename needs to be unique
         $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
         $path = $art_image->storeAs('public/images', $filename);
 
 
-
+    //insert acquired data into db
         Art::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
@@ -87,6 +87,7 @@ class ArtController extends Controller
      */
     public function show(Art $art)
     {
+        //if the id of the user who generated does not match the current user forbid access
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
@@ -124,6 +125,7 @@ class ArtController extends Controller
         $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
         $path = $art_image->storeAs('public/images', $filename);
 
+          //insert and overwrite data in db
         $art->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -142,7 +144,7 @@ class ArtController extends Controller
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
-$art->delete();
+        $art->delete();
         return to_route('arts.index')->with('success', 'Art successfully deleted ');
 
 

@@ -12,9 +12,11 @@ class ArtSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        // creates 50 different values
+        // Seeder is used to create fake data by using table name
+        //here it creates 50 sets of fake data
         Art::factory()->times(50)->create();
     }
 }
