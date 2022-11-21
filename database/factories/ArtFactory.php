@@ -22,6 +22,8 @@ class ArtFactory extends Factory
             'description' => $this->faker->text(200),
             'artist' => $this->faker->text(20),
             'genre' => $this->faker->text(11),
+            'user_id' => 2,
+            'art_image' => $this->faker->image('public/storage', ('tit.png'), 360, 360,)
             // 'art_image' => $this->faker->text(11)
 
 

@@ -11,10 +11,10 @@ class Art extends Model
     use HasFactory;
     //prevent mass assignment
     protected $guarded = [];
-        //replace id in url with uuid
-        public function getRouteKeyName()
-        {
-            return 'uuid';
-        }
+    //replace id in url with uuid
+    // public function getRouteKeyName()
+    // {
+    //     return 'uuid';
+    // }
 
 }
