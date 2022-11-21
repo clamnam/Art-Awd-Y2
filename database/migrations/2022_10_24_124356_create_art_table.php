@@ -16,7 +16,7 @@ return new class extends Migration
         // fields entered for migration
         Schema::create('art', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            // $table->uuid('uuid');
             $table->string('title');
             $table->foreignId('user_id')->constrained();
             $table->string('description');
