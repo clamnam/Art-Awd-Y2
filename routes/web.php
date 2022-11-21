@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtController;
+use App\Http\Controllers\user\ArtController;
+use App\Http\Controllers\\ArtController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
