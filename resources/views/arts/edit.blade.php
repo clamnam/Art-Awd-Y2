@@ -19,6 +19,7 @@
                         placeholder="Start typing here..." class="w-full mt-6" :value="@old('description', $art->description)"></x-textarea>
                     <x-input type="text" field="text" name="genre" placeholder="Genre" class="w-full"
                         autocomplete="off" :value="@old('genre', $art->genre)"></x-input>
+
                     <x-input type="text" field="text" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist', $art->artist)"></x-input>
                     <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"

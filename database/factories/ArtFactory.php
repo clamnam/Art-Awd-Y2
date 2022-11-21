@@ -18,10 +18,12 @@ class ArtFactory extends Factory
     {
         return [
             //Factory is used to create fake data using the model through faker
-            'title' =>$this->faker->word,
+            'title' => $this->faker->word,
             'description' => $this->faker->text(200),
             'artist' => $this->faker->text(20),
-            'genre' => $this->faker->text(11)
+            'genre' => $this->faker->text(11),
+            // 'art_image' => $this->faker->text(11)
+
 
 
         ];
