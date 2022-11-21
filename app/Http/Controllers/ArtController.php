@@ -63,7 +63,7 @@ class ArtController extends Controller
         $path = $art_image->storeAs('public/images', $filename);
 
 
-    //insert acquired data into db
+        //insert acquired data into db
         Art::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
@@ -71,7 +71,7 @@ class ArtController extends Controller
             'description' => $request->description,
             'genre' => $request->genre,
             'artist' => $request->artist,
-           'art_image' => $filename
+            'art_image' => $filename
 
 
         ]);
@@ -107,7 +107,7 @@ class ArtController extends Controller
         return view('arts.edit')->with('art', $art);
         //
     }
-    public function update(Request $request,Art $art)
+    public function update(Request $request, Art $art)
     {
         if ($art->user_id != Auth::id()) {
             return abort(403);
@@ -122,34 +122,28 @@ class ArtController extends Controller
         $art_image = $request->file('art_image');
         //the filename needs to be unique
         $extension = $art_image->getClientOriginalExtension();
-        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
         $path = $art_image->storeAs('public/images', $filename);
 
-          //insert and overwrite data in db
+        //insert and overwrite data in db
         $art->update([
             'title' => $request->title,
             'description' => $request->description,
             'genre' => $request->genre,
             'artist' => $request->artist,
             'art_image' => $filename
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         ]);
-=======
-               ]);
 
-        return to_route('arts.show',$art);
->>>>>>> parent of d804c6f... delete functioning along with success messages
-=======
-               ]);
 
-        return to_route('arts.show',$art)->with('success', 'Art updated successfully');
->>>>>>> parent of a24aa9e... .
 
+        return to_route('arts.show', $art);
+
+
+        return to_route('arts.show', $art)->with('success', 'Art updated successfully');
     }
 
 
-<<<<<<< HEAD
     public function destroy(Art $art)
     {
         if ($art->user_id != Auth::id()) {
@@ -157,12 +151,5 @@ class ArtController extends Controller
         }
         $art->delete();
         return to_route('arts.index')->with('success', 'Art successfully deleted ');
-
-
     }
-=======
-    public function destroy($id)
-    {}
-
->>>>>>> parent of d804c6f... delete functioning along with success messages
 }
