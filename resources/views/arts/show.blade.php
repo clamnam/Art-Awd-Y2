@@ -7,12 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<<<<<<< HEAD
             <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8 border border-green-200 text-green-700">
 
                 <x-alert-success>
                     {{ session('success') }}
                 </x-alert-success>
             </div>
+=======
+>>>>>>> parent of d804c6f... delete functioning along with success messages
             <div class="flex">
 
             </div>
@@ -43,6 +46,7 @@
 
 
             </div>
+<<<<<<< HEAD
             <div class="flex">
                 <a class="items-end btn-link" href="{{ route('arts.edit', $art) }}">Edit art</a>
 
@@ -55,6 +59,9 @@
                 </form>
             </div>
             {{-- diff for humans changes the db format of date to a more readable format --}}
+=======
+            <a class="items-end btn-link" href="{{ route('arts.edit', $art) }}" >Edit art</a>
+>>>>>>> parent of d804c6f... delete functioning along with success messages
 
             <p class="opacity-70 ml-8"><strong>Created: </strong> {{ $art->created_at->diffForHumans() }}</p>
             <p class="opacity-70 ml-8"><strong>Updated at: </strong> {{ $art->updated_at->diffForHumans() }}</p>

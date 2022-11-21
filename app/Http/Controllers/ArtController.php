@@ -76,7 +76,7 @@ class ArtController extends Controller
 
         ]);
 
-        return to_route('arts.index')->with('success', 'Art created successfully');
+        return to_route('arts.index');
         //
     }
     /**
@@ -132,12 +132,19 @@ class ArtController extends Controller
             'genre' => $request->genre,
             'artist' => $request->artist,
             'art_image' => $filename
+<<<<<<< HEAD
         ]);
+=======
+               ]);
+
+        return to_route('arts.show',$art);
+>>>>>>> parent of d804c6f... delete functioning along with success messages
 
         return to_route('arts.show', $art)->with('success', 'Art updated successfully');
     }
 
 
+<<<<<<< HEAD
     public function destroy(Art $art)
     {
         if ($art->user_id != Auth::id()) {
@@ -146,4 +153,9 @@ class ArtController extends Controller
         $art->delete();
         return to_route('arts.index')->with('success', 'Art successfully deleted ');
     }
+=======
+    public function destroy($id)
+    {}
+
+>>>>>>> parent of d804c6f... delete functioning along with success messages
 }
