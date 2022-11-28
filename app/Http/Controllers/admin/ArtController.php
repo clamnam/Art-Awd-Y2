@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Art;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Auth;
+
 
 
 class ArtController extends Controller
@@ -17,17 +19,13 @@ class ArtController extends Controller
      */
     public function index()
     {
-        // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
-        $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
-        return view('arts.index')->with('arts', $arts);
-        //
-        // $arts->each(function($art){
-        //     dump($art->title);
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
 
-        // $arts = Art::all();
-        // dd($arts);
-        // return view('arts.index')->with('arts',$arts);
-        // });
+        $arts = Art::paginate(10);
+        // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
+        // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        return view('admin.arts.index')->with('arts', $arts);
     }
 
     /**
@@ -37,7 +35,9 @@ class ArtController extends Controller
      */
     public function create()
     {
-        return view('arts.create');
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+        return view('admin.arts.create');
         //
     }
     /**
@@ -48,6 +48,8 @@ class ArtController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
         //makes each field required, if it does not the form will fail
         $request->validate([
             'title' => 'required|max:120',
@@ -76,7 +78,7 @@ class ArtController extends Controller
 
         ]);
 
-        return to_route('arts.index');
+        return to_route('admin.arts.index');
         //
     }
     /**
@@ -87,11 +89,15 @@ class ArtController extends Controller
      */
     public function show(Art $art)
     {
-        //if the id of the user who generated does not match the current user forbid access
-        if ($art->user_id != Auth::id()) {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        if (!Auth::id()) {
             return abort(403);
         }
-        return view('arts.show')->with('art', $art);
+
+        //this function is used to get a art by the ID.
+        return view('admin.arts.show')->with('art', $art);
     }
     /**
      * Show the form for editing the specified resource
@@ -101,14 +107,18 @@ class ArtController extends Controller
      */
     public function edit(Art $art)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
-        return view('arts.edit')->with('art', $art);
+        return view('admin.arts.edit')->with('art', $art);
         //
     }
     public function update(Request $request, Art $art)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
@@ -137,19 +147,21 @@ class ArtController extends Controller
 
 
 
-        return to_route('arts.show', $art);
+        return to_route('admin.arts.show', $art);
 
 
-        return to_route('arts.show', $art)->with('success', 'Art updated successfully');
+        return to_route('admin.arts.show', $art)->with('success', 'Art updated successfully');
     }
 
 
     public function destroy(Art $art)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
         $art->delete();
-        return to_route('arts.index')->with('success', 'Art successfully deleted ');
+        return to_route('admin.arts.index')->with('success', 'Art successfully deleted ');
     }
 }

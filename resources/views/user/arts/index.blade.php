@@ -11,15 +11,13 @@
 
 
 
+            {{-- brings you to create.blade.php where you can add a new piece --}}
+            {{-- <a href="{{ route('user.arts.create') }}" class="btn-lg btn-link mt-6">Add an art piece</a> --}}
 
             {{-- success printed if you add piece and return to this page --}}
             <x-alert-success>
                 {{ session('success') }}
             </x-alert-success>
-
-            {{-- brings you to create.blade.php where you can add a new piece --}}
-            <a href="{{ route('arts.create') }}" class="btn-lg btn-link mt-6">Add an art piece</a>
-
             @forelse ($arts as $art)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                     {{-- Brings you to the show page with a link in the title --}}

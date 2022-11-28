@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Art;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +20,14 @@ class ArtController extends Controller
     {
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
-        return view('arts.index')->with('arts', $arts);
+        return view('user.arts.index')->with('arts', $arts);
         //
         // $arts->each(function($art){
         //     dump($art->title);
 
         // $arts = Art::all();
         // dd($arts);
-        // return view('arts.index')->with('arts',$arts);
+        // return view('user.arts.index')->with('arts',$arts);
         // });
     }
 
@@ -37,7 +38,7 @@ class ArtController extends Controller
      */
     public function create()
     {
-        return view('arts.create');
+        return view('user.arts.create');
         //
     }
     /**
@@ -76,7 +77,7 @@ class ArtController extends Controller
 
         ]);
 
-        return to_route('arts.index');
+        return to_route('user.arts.index');
         //
     }
     /**
@@ -91,7 +92,7 @@ class ArtController extends Controller
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
-        return view('arts.show')->with('art', $art);
+        return view('user.arts.show')->with('art', $art);
     }
     /**
      * Show the form for editing the specified resource
@@ -104,7 +105,7 @@ class ArtController extends Controller
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }
-        return view('arts.edit')->with('art', $art);
+        return view('user.arts.edit')->with('art', $art);
         //
     }
     public function update(Request $request, Art $art)
@@ -137,10 +138,10 @@ class ArtController extends Controller
 
 
 
-        return to_route('arts.show', $art);
+        return to_route('user.arts.show', $art);
 
 
-        return to_route('arts.show', $art)->with('success', 'Art updated successfully');
+        return to_route('user.arts.show', $art)->with('success', 'Art updated successfully');
     }
 
 
@@ -150,6 +151,6 @@ class ArtController extends Controller
             return abort(403);
         }
         $art->delete();
-        return to_route('arts.index')->with('success', 'Art successfully deleted ');
+        return to_route('user.arts.index')->with('success', 'Art successfully deleted ');
     }
 }
