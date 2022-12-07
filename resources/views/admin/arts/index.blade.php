@@ -13,7 +13,6 @@
 
             {{-- brings you to create.blade.php where you can add a new piece --}}
             <a href="{{ route('admin.arts.create') }}" class="btn-lg btn-link mt-6">Add an art piece</a>
-
             {{-- success printed if you add piece and return to this page --}}
             <x-alert-success>
                 {{ session('success') }}
@@ -27,9 +26,11 @@
                         {{ $art->description }}
                         <br>
                         {{ $art->artist }}
-
-                        {{ $art->genre }}
-
+                        <br>
+                    <p class="font-bold"> genre : {{ $art->genre }}
+                    </p>
+                    <p class="font-bold"> patron : {{ $art->patron->name }}
+                    </p>
 
                     </p>
                     {{-- diff for humans changes the db format of date to a more readable format --}}
@@ -41,7 +42,7 @@
                 <p>No Art</p>
             @endforelse
             {{-- links to different pages --}}
-            {{ $arts->links() }}
+            {{-- {{ $arts->links() }} --}}
 
         </div>
     </div>

@@ -13,7 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('arts', function (Blueprint $table) {
+        Schema::table('art', function (Blueprint $table) {
+            $table->unsignedBigInteger('patron_id');
+            $table->foreign('patron_id')->references('id')->on('patrons')->onUpdate('cascade')->onDelete('restrict');
             //
         });
     }
@@ -25,7 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('arts', function (Blueprint $table) {
+        Schema::table('art', function (Blueprint $table) {
+            $table->dropForeign(['patron_id']);
+            $table->dropColumn('patron_id');
             //
         });
     }

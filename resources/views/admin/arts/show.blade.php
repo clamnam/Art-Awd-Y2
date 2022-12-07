@@ -28,6 +28,8 @@
 
                         {{ $art->genre }}
                     </p>
+                    <p class="font-bold"> {{ $art->patron->name }}
+                    </p>
 
 
                     <p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>

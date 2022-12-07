@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Patron extends Model
 {
     use HasFactory;
+    public function arts()
+    {
+        return $this->hasMany(Art::class);
+    }
 }

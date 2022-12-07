@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Patron;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +28,7 @@ class HomeController extends Controller
         }
         return redirect()->route($home);
     }
-    public function publisherIndex(Request $request)
+    public function patronIndex(Request $request)
     {
         $user = Auth::user();
         $home = 'home';

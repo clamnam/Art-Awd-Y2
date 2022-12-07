@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Art extends Model
 {
-    protected $guarded = [];
     use HasFactory;
+
+    protected $guarded = [];
     //prevent mass assignment
 
     //replace id in url with uuid
@@ -17,5 +18,8 @@ class Art extends Model
     // {
     //     return 'uuid';
     // }
-
+    public function patron()
+    {
+        return $this->belongsTo(Patron::class);
+    }
 }

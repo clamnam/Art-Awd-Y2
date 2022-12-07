@@ -22,6 +22,17 @@
 
                     <x-input type="text" field="text" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist', $art->artist)"></x-input>
+                    <div class="form-group">
+                        <label for="patron">Patron</label>
+                        <select name="patron_id">
+                            @foreach ($patrons as $patron)
+                                <option value="{{ $patron->id }}"
+                                    {{ old('patron_id') == $patron->id ? 'selected' : '' }}>
+                                    {{ $patron->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"
                         field="art_image">
                         :value="@old('art_image', $filename)">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Art;
+use App\Models\Patron;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,7 @@ class ArtController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $arts = Art::paginate(10);
+        $arts = Art::with('patron')->get();
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('admin.arts.index')->with('arts', $arts);
@@ -37,7 +39,9 @@ class ArtController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        return view('admin.arts.create');
+
+        $patrons = Patron::all();
+        return view('admin.arts.create')->with('patrons', $patrons);
         //
     }
     /**
@@ -55,6 +59,7 @@ class ArtController extends Controller
             'title' => 'required|max:120',
             'description' => 'required',
             'genre' => 'required',
+            'patron_id' => 'required',
             'artist' => 'required',
             'art_image' => 'file|image'
         ]);
@@ -71,6 +76,8 @@ class ArtController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
+            'patron_id' => $request->patron_id,
+
             'genre' => $request->genre,
             'artist' => $request->artist,
             'art_image' => $filename
@@ -100,7 +107,7 @@ class ArtController extends Controller
         return view('admin.arts.show')->with('art', $art);
     }
     /**
-     * Show the form for editing the specified resource
+     * Show the form for editing the specified resource read the
      *
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -109,22 +116,23 @@ class ArtController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
-        return view('admin.arts.edit')->with('art', $art);
-        //
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
+        $patrons = Patron::all();
+        return view('admin.arts.edit')->with('art', $art)->with('patrons', $patrons);
     }
     public function update(Request $request, Art $art)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
         $request->validate([
             'title' => 'required|max:120',
             'description' => 'required',
+            'patron_id' => 'required',
             'genre' => 'required',
             'artist' => 'required',
             'art_image' => 'required'
@@ -139,6 +147,7 @@ class ArtController extends Controller
         $art->update([
             'title' => $request->title,
             'description' => $request->description,
+            'patron_id' => $request->patron_id,
             'genre' => $request->genre,
             'artist' => $request->artist,
             'art_image' => $filename
@@ -158,9 +167,9 @@ class ArtController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
         $art->delete();
         return to_route('admin.arts.index')->with('success', 'Art successfully deleted ');
     }

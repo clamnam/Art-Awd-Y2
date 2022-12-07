@@ -41,7 +41,7 @@
                 <p>No Art</p>
             @endforelse
             {{-- links to different pages --}}
-            {{ $arts->links() }}
+            {{-- {{ $arts->links() }} --}}
 
         </div>
     </div>
