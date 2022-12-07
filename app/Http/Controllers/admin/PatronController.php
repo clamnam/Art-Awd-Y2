@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Patron;
+
 
 class PatronController extends Controller
 {
@@ -14,6 +16,13 @@ class PatronController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        $patrons = Patron::get();
+        // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
+        // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        return view('admin.patrons.index')->with('patrons', $patrons);
         //
     }
 
@@ -24,6 +33,12 @@ class PatronController extends Controller
      */
     public function create()
     {
+        //
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        $patrons = Patron::all();
+        return view('admin.patrons.create')->with('patrons', $patrons);
         //
     }
 
