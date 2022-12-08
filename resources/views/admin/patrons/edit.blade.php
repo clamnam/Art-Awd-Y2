@@ -9,21 +9,21 @@
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                 {{-- form that takes in data and through store function in ArtController inserts the data into the database --}}
                 {{-- enctype is a method of encrypting the form data --}}
-                <form action="{{ route('admin.patrons.update', $art) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.patrons.update', $patron) }}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
-                    <x-input type="text" field="text" name="name" placeholder="name" class="w-full"
-                        autocomplete="off" :value="@old('name', $art->name)"></x-input>
+                    <x-input type="text" field="name" name="name" placeholder="name" class="w-full"
+                        autocomplete="off" :value="@old('name', $patron->name)"></x-input>
 
                     <x-input type="text" field="text" name="address" placeholder="address" class="w-full"
-                        autocomplete="off" :value="@old('address', $art->address)"></x-input>
-
-                    </x-input>
+                        autocomplete="off" :value="@old('address', $patron->address)"></x-input>
 
 
 
 
-                    <x-button class="mt-6">Save Art </x-button>
+
+
+                    <x-button class="mt-6">Save Patron </x-button>
                 </form>
 
             </div>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patron extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function arts()
     {
         return $this->hasMany(Art::class);

@@ -34,9 +34,9 @@ class HomeController extends Controller
         $home = 'home';
 
         if ($user->hasRole('admin')) {
-            $home = 'admin.label.index';
+            $home = 'admin.patrons.index';
         } else if ($user->hasRole('user')) {
-            $home = 'user.label.index';
+            $home = 'user.patrons.index';
         }
         return redirect()->route($home);
     }

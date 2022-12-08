@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Art;
+use App\Models\Patron;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PatronController extends Controller
 {
@@ -14,6 +18,11 @@ class PatronController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        // $user->authorizeRoles('admin');
+
+        $patrons = Patron::all();
+        return view('user.patrons.index')->with('patrons', $patrons);
         //
     }
 
@@ -44,9 +53,17 @@ class PatronController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Patron $patron)
     {
-        //
+        $user = Auth::user();
+
+
+        if (!Auth::id()) {
+            return abort(403);
+        }
+
+        //this function is used to get a patron by the ID.
+        return view('user.patrons.show')->with('patron', $patron);
     }
 
     /**

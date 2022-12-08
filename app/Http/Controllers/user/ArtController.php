@@ -50,34 +50,34 @@ class ArtController extends Controller
     public function store(Request $request)
     {
         //makes each field required, if it does not the form will fail
-        $request->validate([
-            'title' => 'required|max:120',
-            'description' => 'required',
-            'genre' => 'required',
-            'artist' => 'required',
-            'art_image' => 'file|image'
-        ]);
-        //images
-        $art_image = $request->file('art_image');
-        $extension = $art_image->getClientOriginalExtension();
-        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
-        $path = $art_image->storeAs('public/images', $filename);
+        // $request->validate([
+        //     'title' => 'required|max:120',
+        //     'description' => 'required',
+        //     'genre' => 'required',
+        //     'artist' => 'required',
+        //     'art_image' => 'file|image'
+        // ]);
+        // //images
+        // $art_image = $request->file('art_image');
+        // $extension = $art_image->getClientOriginalExtension();
+        // $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        // $path = $art_image->storeAs('public/images', $filename);
 
 
-        //insert acquired data into db
-        Art::create([
-            // 'uuid' => Str::uuid(),
-            'user_id' => Auth::id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'genre' => $request->genre,
-            'artist' => $request->artist,
-            'art_image' => $filename
+        // //insert acquired data into db
+        // Art::create([
+        //     // 'uuid' => Str::uuid(),
+        //     'user_id' => Auth::id(),
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'genre' => $request->genre,
+        //     'artist' => $request->artist,
+        //     'art_image' => $filename
 
 
-        ]);
+        // ]);
 
-        return to_route('user.arts.index');
+        // return to_route('user.arts.index');
         //
     }
     /**
@@ -102,55 +102,56 @@ class ArtController extends Controller
      */
     public function edit(Art $art)
     {
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
-        return view('user.arts.edit')->with('art', $art);
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
+        // return view('user.arts.edit')->with('art', $art);
         //
     }
     public function update(Request $request, Art $art)
     {
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
-        $request->validate([
-            'title' => 'required|max:120',
-            'description' => 'required',
-            'genre' => 'required',
-            'artist' => 'required',
-            'art_image' => 'required'
-        ]);
-        $art_image = $request->file('art_image');
-        //the filename needs to be unique
-        $extension = $art_image->getClientOriginalExtension();
-        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
-        $path = $art_image->storeAs('public/images', $filename);
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
+        // $request->validate([
+        //     'title' => 'required|max:120',
+        //     'description' => 'required',
+        //     'genre' => 'required',
+        //     'artist' => 'required',
+        //     'art_image' => 'required'
+        // ]);
+        // $art_image = $request->file('art_image');
+        // //the filename needs to be unique
+        // $extension = $art_image->getClientOriginalExtension();
+        // $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        // $path = $art_image->storeAs('public/images', $filename);
 
-        //insert and overwrite data in db
-        $art->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'genre' => $request->genre,
-            'artist' => $request->artist,
-            'art_image' => $filename
+        // //insert and overwrite data in db
+        // $art->update([
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'genre' => $request->genre,
+        //     'artist' => $request->artist,
+        //     'art_image' => $filename
 
-        ]);
-
-
-
-        return to_route('user.arts.show', $art);
+        // ]
+        // );
 
 
-        return to_route('user.arts.show', $art)->with('success', 'Art updated successfully');
+
+        // return to_route('user.arts.show', $art);
+
+
+        // return to_route('user.arts.show', $art)->with('success', 'Art updated successfully');
     }
 
 
     public function destroy(Art $art)
     {
-        if ($art->user_id != Auth::id()) {
-            return abort(403);
-        }
-        $art->delete();
-        return to_route('user.arts.index')->with('success', 'Art successfully deleted ');
+        // if ($art->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
+        // $art->delete();
+        // return to_route('user.arts.index')->with('success', 'Art successfully deleted ');
     }
 }

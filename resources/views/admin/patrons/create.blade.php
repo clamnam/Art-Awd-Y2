@@ -15,6 +15,7 @@
                 {{-- form that takes in data and through store function in ArtController inserts the data into the database --}}
                 {{-- enctype is a method of encrypting the form data --}}
                 <form action="{{ route('admin.patrons.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <x-input type="text" field="text" name="name" placeholder="name" class="w-full"
                         autocomplete="off" :value="@old('name')">
                     </x-input>

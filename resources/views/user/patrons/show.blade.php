@@ -25,19 +25,19 @@
                         {{ $patron->address }}
                         <br>
                 </div>
-                <div class="flex">
-                    <a class="items-end btn-link" href="{{ route('admin.patrons.edit', $patron) }}">Edit patron</a>
+                {{-- <div class="flex">
+                    <a class="items-end btn-link" href="{{ route('user.patrons.edit', $patron) }}">Edit patron</a>
 
-                    <form action="{{ route('admin.patrons.destroy', $patron) }}" method="post">
-                        @method('delete')
-                        @csrf
-                        {{-- Allows you to delete with an "are you sure?" prompt --}}
-                        <button type="submit" class="btn-link bg-red-600 ml-4"
-                            onclick="return confirm('Are you sure you wish to delete this patron?')">Delete patron
-                        </button>
-                    </form>
+                    <form action="{{ route('user.patrons.destroy', $patron) }}" method="post">
+                        @method('delete') --}}
+                {{-- @csrf --}}
+                {{-- Allows you to delete with an "are you sure?" prompt --}}
+                {{-- <button type="submit" class="btn-link bg-red-600 ml-4"
+                    onclick="return confirm('Are you sure you wish to delete this patron?')">Delete patron
+                </button> --}}
+                {{-- </form> --}}
 
-                </div>
+                {{-- </div> --}}
 
             </div>
 </x-app-layout>
