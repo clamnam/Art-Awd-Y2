@@ -28,7 +28,7 @@
                         <br>
                         {{ $art->artist }}
 
-                        {{ $art->genre }}
+                        {{ $art->art_style }}
 
 
                     </p>

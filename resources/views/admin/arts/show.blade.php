@@ -26,7 +26,7 @@
                         <br>
                         {{ $art->artist }}
 
-                        {{ $art->genre }}
+                        {{ $art->art_style }}
                     </p>
                     <p class="font-bold"> {{ $art->patron->name }}
                     </p>

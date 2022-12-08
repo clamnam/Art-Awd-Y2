@@ -27,7 +27,7 @@
                         <br>
                         {{ $art->artist }}
                         <br>
-                    <p class="font-bold"> genre : {{ $art->genre }}
+                    <p class="font-bold"> art_style : {{ $art->art_style }}
                     </p>
                     <p class="font-bold"> patron : {{ $art->patron->name }}
                     </p>

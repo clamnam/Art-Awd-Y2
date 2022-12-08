@@ -53,7 +53,7 @@ class ArtController extends Controller
         // $request->validate([
         //     'title' => 'required|max:120',
         //     'description' => 'required',
-        //     'genre' => 'required',
+        //     'art_style' => 'required',
         //     'artist' => 'required',
         //     'art_image' => 'file|image'
         // ]);
@@ -70,7 +70,7 @@ class ArtController extends Controller
         //     'user_id' => Auth::id(),
         //     'title' => $request->title,
         //     'description' => $request->description,
-        //     'genre' => $request->genre,
+        //     'art_style' => $request->art_style,
         //     'artist' => $request->artist,
         //     'art_image' => $filename
 
@@ -116,7 +116,7 @@ class ArtController extends Controller
         // $request->validate([
         //     'title' => 'required|max:120',
         //     'description' => 'required',
-        //     'genre' => 'required',
+        //     'art_style' => 'required',
         //     'artist' => 'required',
         //     'art_image' => 'required'
         // ]);
@@ -130,7 +130,7 @@ class ArtController extends Controller
         // $art->update([
         //     'title' => $request->title,
         //     'description' => $request->description,
-        //     'genre' => $request->genre,
+        //     'art_style' => $request->art_style,
         //     'artist' => $request->artist,
         //     'art_image' => $filename
 

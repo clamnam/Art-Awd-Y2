@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        // fields entered for migration
-        Schema::create('art', function (Blueprint $table) {
+        Schema::create('art_styles', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('uuid');
-            $table->string('title');
-            $table->foreignId('user_id')->constrained();
+            $table->string('name');
             $table->string('description');
-            $table->string('artist');
-            $table->string('art_image');
-            $table->timestamps();
         });
     }
 
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('art');
+        Schema::dropIfExists('art_styles');
     }
 };

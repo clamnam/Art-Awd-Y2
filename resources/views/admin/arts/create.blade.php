@@ -24,8 +24,8 @@
                         class="w-full" :value="@old('description')">
                     </x-textarea>
 
-                    <x-input type="text" field="genre" name="genre" placeholder="Genre" class="w-full"
-                        autocomplete="off" :value="@old('genre')"></x-input>
+                    <x-input type="text" field="art_style" name="art_style" placeholder="Art Style" class="w-full"
+                        autocomplete="off" :value="@old('art_style')"></x-input>
                     <x-input type="text" field="artist" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist')"></x-input>
                     <div class="form-group">

@@ -18,6 +18,10 @@ class Art extends Model
     // {
     //     return 'uuid';
     // }
+    public function art_styles()
+    {
+        return $this->belongsToMany(Art_style::class);
+    }
     public function patron()
     {
         return $this->belongsTo(Patron::class);

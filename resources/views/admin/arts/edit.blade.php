@@ -17,8 +17,8 @@
 
                     <x-textarea type="text" name="description" rows="10" field="description"
                         placeholder="Start typing here..." class="w-full mt-6" :value="@old('description', $art->description)"></x-textarea>
-                    <x-input type="text" field="text" name="genre" placeholder="Genre" class="w-full"
-                        autocomplete="off" :value="@old('genre', $art->genre)"></x-input>
+                    <x-input type="text" field="text" name="art_style" placeholder="Art Style" class="w-full"
+                        autocomplete="off" :value="@old('art_style', $art->art_style)"></x-input>
 
                     <x-input type="text" field="text" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist', $art->artist)"></x-input>
