@@ -29,10 +29,14 @@
                         {{ $art->genre }}
                     </p>
 
-
+                    <p class=""><span class="font-bold">Patron : </span> {{ $art->patron->name }}</p>
+                    @foreach ($art->style as $style)
+                        <tr>
+                            <td>
+                                <p><span class="font-bold">Art Style : </span>{{ $style->name }}</p>
+                    @endforeach
                     <p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>
                     <div class="">
-                        {{-- brings images in using file names stored in the db, that are stored in the path in asset --}}
                         <tr>
                             <td rowspan="6">
                                 <img src="{{ asset('storage/images/' . $art->art_image) }}" width="150"

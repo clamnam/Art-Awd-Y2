@@ -22,4 +22,8 @@ class Art extends Model
     {
         return $this->belongsTo(Patron::class);
     }
+    public function style()
+    {
+        return $this->belongsToMany(Style::class)->withTimestamps();
+    }
 }

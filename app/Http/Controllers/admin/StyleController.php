@@ -1,17 +1,16 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Patron;
+use App\Models\Style;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class PatronController extends Controller
+class StyleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +21,8 @@ class PatronController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $patrons = Patron::all();
-        return view('admin.patrons.index')->with('patrons', $patrons);
+        $styles = Style::all();
+        return view('admin.styles.index')->with('styles', $styles);
         //
     }
 
@@ -32,14 +31,14 @@ class PatronController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Patron $patron)
+    public function create(Style $style)
     {
         //
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        // $patrons = Patron::all();
-        return view('admin.patrons.create')->with('patron', $patron);
+        $styles = Style::all();
+        return view('admin.style.create')->with('style', $style);
 
 
         //
@@ -58,19 +57,19 @@ class PatronController extends Controller
         //makes each field required, if it does not the form will fail
         $request->validate([
             'name' => 'required',
-            'address' => 'required'
+            'description' => 'required'
 
         ]);
 
         //insert acquired data into db
-        Patron::create([
+        Style::create([
             // 'uuid' => Str::uuid(),
             // 'patron_id' => Auth::id(),
             'name' => $request->name,
-            'address' => $request->address
+            'description' => $request->description
 
         ]);
-        return to_route('admin.patrons.index');
+        return to_route('admin.style.index');
         //
     }
 
@@ -80,7 +79,7 @@ class PatronController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Patron $patron)
+    public function show(Style $style)
     {
         //
         $user = Auth::user();
@@ -90,8 +89,8 @@ class PatronController extends Controller
             return abort(403);
         }
 
-        //this function is used to get a patron by the ID.
-        return view('admin.patrons.show')->with('patron', $patron);
+        //this function is used to get a style by the ID.
+        return view('admin.style.show')->with('style', $style);
     }
 
     /**
@@ -100,14 +99,14 @@ class PatronController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patron $patron)
+    public function edit(Style $style)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
-        return view('admin.patrons.edit')->with('patron', $patron);
+        return view('admin.style.edit')->with('style', $style);
         //
     }
 
@@ -118,7 +117,7 @@ class PatronController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patron $patron)
+    public function update(Request $request, Style $style)
     {
         //
         $user = Auth::user();
@@ -128,21 +127,21 @@ class PatronController extends Controller
         // }
         $request->validate([
             'name' => 'required|max:120',
-            'address' => 'required'
+            'description' => 'required'
 
         ]);
 
         //insert and overwrite data in db
-        $patron->update([
+        $style->update([
             'name' => $request->name,
-            'address' => $request->address,
+            'description' => $request->description,
 
         ]);
 
-        return to_route('admin.patrons.show', $patron);
+        return to_route('admin.style.show', $style);
 
 
-        return to_route('admin.patrons.show', $patron)->with('success', 'patron updated successfully');
+        return to_route('admin.style.show', $style)->with('success', 'style updated successfully');
     }
 
     /**
@@ -151,13 +150,13 @@ class PatronController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patron $patron)
+    public function destroy(Style $style)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        $patron->arts()->delete();
-        $patron->delete();
-        return to_route('admin.patrons.index')->with('success', 'Patron successfully deleted ');
+        $style->arts()->delete();
+        $style->delete();
+        return to_route('admin.style.index')->with('success', 'Style successfully deleted ');
 
         //
     }

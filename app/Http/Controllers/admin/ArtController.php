@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Art;
 use App\Models\Patron;
+use App\Models\Style;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,10 @@ class ArtController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $arts = Art::with('patron')->get();
+        $arts = Art::with('patron')
+            ->with('style')
+            ->get();
+
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('admin.arts.index')->with('arts', $arts);
@@ -41,7 +46,8 @@ class ArtController extends Controller
         $user->authorizeRoles('admin');
 
         $patrons = Patron::all();
-        return view('admin.arts.create')->with('patrons', $patrons);
+        $styles = Style::all();
+        return view('admin.arts.create')->with('patrons', $patrons)->with('styles', $styles);
         //
     }
     /**
@@ -59,6 +65,7 @@ class ArtController extends Controller
             'title' => 'required|max:120',
             'description' => 'required',
             'genre' => 'required',
+            'styles' => ['required', 'exists:styles,id'],
             'patron_id' => 'required',
             'artist' => 'required',
             'art_image' => 'file|image'
@@ -71,7 +78,7 @@ class ArtController extends Controller
 
 
         //insert acquired data into db
-        Art::create([
+        $art = Art::create([
             // 'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
             'title' => $request->title,
@@ -84,6 +91,7 @@ class ArtController extends Controller
 
 
         ]);
+        $art->style()->attach($request->styles);
 
         return to_route('admin.arts.index');
         //
@@ -133,6 +141,7 @@ class ArtController extends Controller
             'title' => 'required|max:120',
             'description' => 'required',
             'patron_id' => 'required',
+            'styles' => ['required', 'exists:styles,id'],
             'genre' => 'required',
             'artist' => 'required',
             'art_image' => 'required'

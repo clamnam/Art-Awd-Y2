@@ -39,6 +39,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="styles"><strong>Art Styles</strong></label>
+                        @foreach ($styles as $style)
+                            <input type="checkbox" value="{{ $style->id }}" name="styles[]">
+                            {{ $style->name }}
+                        @endforeach
+                    </div>
 
                     <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"
                         field="art_image">

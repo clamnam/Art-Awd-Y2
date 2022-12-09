@@ -20,8 +20,12 @@ class ArtController extends Controller
     {
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        $arts = Art::with('patron')
+            ->with('style')
+            ->get();
         return view('user.arts.index')->with('arts', $arts);
         //
+
         // $arts->each(function($art){
         //     dump($art->title);
 

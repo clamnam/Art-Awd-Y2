@@ -27,10 +27,13 @@
                         {{ $art->artist }}
 
                         {{ $art->genre }}
-                    </p>
-                    <p class="font-bold"> {{ $art->patron->name }}
-                    </p>
 
+                    <p class=""><span class="font-bold">Patron : </span> {{ $art->patron->name }}</p>
+                    @foreach ($art->style as $style)
+                        <tr>
+                            <td>
+                                <p><span class="font-bold">Art Style : </span>{{ $style->name }}</p>
+                    @endforeach
 
                     <p class="mt-4 whitespace-pre-wrap"{{ $art->text }}></p>
                     <div class="">
