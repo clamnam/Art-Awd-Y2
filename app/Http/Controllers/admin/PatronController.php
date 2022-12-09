@@ -20,7 +20,7 @@ class PatronController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
 
         $patrons = Patron::all();
         return view('admin.patrons.index')->with('patrons', $patrons);
@@ -36,7 +36,7 @@ class PatronController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
 
         // $patrons = Patron::all();
         return view('admin.patrons.create')->with('patron', $patron);
@@ -54,7 +54,7 @@ class PatronController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
         //makes each field required, if it does not the form will fail
         $request->validate([
             'name' => 'required',
@@ -84,7 +84,7 @@ class PatronController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
 
         if (!Auth::id()) {
             return abort(403);
@@ -103,7 +103,7 @@ class PatronController extends Controller
     public function edit(Patron $patron)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
@@ -122,7 +122,7 @@ class PatronController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
@@ -154,7 +154,7 @@ class PatronController extends Controller
     public function destroy(Patron $patron)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+
         $patron->arts()->delete();
         $patron->delete();
         return to_route('admin.patrons.index')->with('success', 'Patron successfully deleted ');

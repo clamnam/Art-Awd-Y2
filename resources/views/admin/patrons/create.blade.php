@@ -16,12 +16,11 @@
                 {{-- enctype is a method of encrypting the form data --}}
                 <form action="{{ route('admin.patrons.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <x-input type="text" field="text" name="name" placeholder="name" class="w-full"
-                        autocomplete="off" :value="@old('name')">
-                    </x-input>
-                    <x-input type="text" field="text" name="address" placeholder="address" class="w-full"
-                        autocomplete="off" :value="@old('address')">
-                    </x-input>
+                    <x-input type="text" field="name" name="name" placeholder="name" class="w-full"
+                        autocomplete="off" :value="@old('name')"></x-input>
+                    <x-input type="text" field="address" name="address" placeholder="Address" class="w-full"
+                        autocomplete="off" :value="@old('address')"></x-input>
+
                     <x-button class="mt-6">Save Art </x-button>
                 </form>
 

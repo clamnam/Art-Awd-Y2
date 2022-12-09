@@ -19,7 +19,6 @@ class StyleController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         $styles = Style::all();
         return view('admin.styles.index')->with('styles', $styles);
@@ -35,7 +34,6 @@ class StyleController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         $styles = Style::all();
         return view('admin.styles.create')->with('style', $style);
@@ -53,7 +51,6 @@ class StyleController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         //makes each field required, if it does not the form will fail
         $request->validate([
             'name' => 'required',
@@ -83,7 +80,6 @@ class StyleController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         if (!Auth::id()) {
             return abort(403);
@@ -102,7 +98,6 @@ class StyleController extends Controller
     public function edit(Style $style)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
@@ -121,7 +116,6 @@ class StyleController extends Controller
     {
         //
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
@@ -153,7 +147,6 @@ class StyleController extends Controller
     public function destroy(Style $style)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         $style->arts()->delete();
         $style->delete();
         return to_route('admin.styles.index')->with('success', 'Style successfully deleted ');

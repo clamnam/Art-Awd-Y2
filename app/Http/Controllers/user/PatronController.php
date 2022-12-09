@@ -19,7 +19,6 @@ class PatronController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $user->authorizeRoles('admin');
 
         $patrons = Patron::all();
         return view('user.patrons.index')->with('patrons', $patrons);

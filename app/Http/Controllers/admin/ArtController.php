@@ -24,12 +24,11 @@ class ArtController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         $arts = Art::with('patron')
             ->with('style')
             ->get();
-
+        $styles = Style::get();
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('admin.arts.index')->with('arts', $arts);
@@ -43,7 +42,6 @@ class ArtController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         $patrons = Patron::all();
         $styles = Style::all();
@@ -59,7 +57,6 @@ class ArtController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         //makes each field required, if it does not the form will fail
         $request->validate([
             'title' => 'required|max:120',
@@ -93,7 +90,7 @@ class ArtController extends Controller
         ]);
         $art->style()->attach($request->styles);
 
-        return to_route('admin.arts.index');
+        return to_route('admin.arts.index')->with('success', 'Art updated successfully');
         //
     }
     /**
@@ -105,7 +102,6 @@ class ArtController extends Controller
     public function show(Art $art)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
 
         if (!Auth::id()) {
             return abort(403);
@@ -123,17 +119,17 @@ class ArtController extends Controller
     public function edit(Art $art)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+        $styles = Style::all();
+
         $patrons = Patron::all();
-        return view('admin.arts.edit')->with('art', $art)->with('patrons', $patrons);
+        return view('admin.arts.edit')->with('art', $art)->with('patrons', $patrons)->with('styles', $styles);
     }
     public function update(Request $request, Art $art)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
@@ -165,7 +161,6 @@ class ArtController extends Controller
 
 
 
-        return to_route('admin.arts.show', $art);
 
 
         return to_route('admin.arts.show', $art)->with('success', 'Art updated successfully');
@@ -175,7 +170,6 @@ class ArtController extends Controller
     public function destroy(Art $art)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }

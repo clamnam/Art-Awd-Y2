@@ -17,11 +17,12 @@
 
                     <x-textarea type="text" name="description" rows="10" field="description"
                         placeholder="Start typing here..." class="w-full mt-6" :value="@old('description', $art->description)"></x-textarea>
-                    <x-input type="text" field="text" name="genre" placeholder="Genre" class="w-full"
+                    <x-input type="text" field="genre" name="genre" placeholder="Genre" class="w-full"
                         autocomplete="off" :value="@old('genre', $art->genre)"></x-input>
 
-                    <x-input type="text" field="text" name="artist" placeholder="Artist" class="w-full"
+                    <x-input type="text" field="artist" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist', $art->artist)"></x-input>
+
                     <div class="form-group">
                         <label for="patron">Patron</label>
                         <select name="patron_id">
@@ -36,7 +37,8 @@
                     <div class="form-group">
                         <label for="styles"><strong>Art Styles</strong></label>
                         @foreach ($styles as $style)
-                            <input type="checkbox" value="{{ $style->id }}" name="styles[]">
+                            <input type="checkbox", value="{{ $style->id }}"
+                                {{ old('patron_id') == $patron->id ? 'selected' : '' }} name="styles[]">
                             {{ $style->name }}
                         @endforeach
                     </div>

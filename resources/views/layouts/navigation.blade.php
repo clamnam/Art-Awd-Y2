@@ -22,8 +22,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('home.styles.index')" :active="request()->routeIs('home.styles.index')">
-                        {{ __('Style') }}
+                    <x-nav-link :href="route('home.style.index')" :active="request()->routeIs('home.style.index')">
+                        {{ __('Styles') }}
                     </x-nav-link>
                 </div>
 

@@ -12,17 +12,13 @@
                 <form action="{{ route('admin.styles.update', $style) }}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
-                    <x-input type="text" field="name" name="name" placeholder="Title" class="w-full"
-                        autocomplete="off" :value="@old('name', $style->name)"></x-input>
-
-                    <x-textarea type="text" name="description" rows="10" field="description"
-                        placeholder="Start typing here..." class="w-full mt-6" :value="@old('description', $style->description)"></x-textarea>
-
-                    <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"
-                        field="art_image">
-                        :value="@old('art_image', $filename)">
-
+                    <x-input type="text" field="name" name="name" placeholder="Name" class="w-full"
+                        autocomplete="off" :value="@old('name')">
                     </x-input>
+
+                    <x-textarea name="description" field="description" rows="10" placeholder="Description"
+                        class="w-full" :value="@old('description')">
+                    </x-textarea>
 
 
 

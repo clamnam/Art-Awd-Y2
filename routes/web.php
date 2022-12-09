@@ -41,9 +41,8 @@ Route::get('/home/styles', [App\Http\Controllers\HomeController::class, 'styleIn
 
 Route::resource('/admin/arts', AdminArtController::class)->middleware(['auth'])->names('admin.arts');
 Route::resource('/user/arts', UserArtController::class)->middleware(['auth'])->names('user.arts')->only(['index', 'show']);
-
 Route::resource('/admin/patrons', AdminPatronController::class)->middleware(['auth'])->names('admin.patrons');
 Route::resource('/user/patrons', UserPatronController::class)->middleware(['auth'])->names('user.patrons')->only(['index', 'show']);
 
 Route::resource('/admin/styles', AdminStyleController::class)->middleware(['auth'])->names('admin.styles');
-// Route::resource('/user/styles', UserPatronController::class)->middleware(['auth'])->names('user.styles')->only(['index', 'show']);
+Route::resource('/user/styles', UserStyleController::class)->middleware(['auth'])->names('user.styles');
