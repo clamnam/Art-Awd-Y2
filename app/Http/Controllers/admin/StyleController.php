@@ -38,7 +38,7 @@ class StyleController extends Controller
         $user->authorizeRoles('admin');
 
         $styles = Style::all();
-        return view('admin.style.create')->with('style', $style);
+        return view('admin.styles.create')->with('style', $style);
 
 
         //
@@ -69,7 +69,7 @@ class StyleController extends Controller
             'description' => $request->description
 
         ]);
-        return to_route('admin.style.index');
+        return to_route('admin.styles.index');
         //
     }
 
@@ -90,7 +90,7 @@ class StyleController extends Controller
         }
 
         //this function is used to get a style by the ID.
-        return view('admin.style.show')->with('style', $style);
+        return view('admin.styles.show')->with('style', $style);
     }
 
     /**
@@ -106,7 +106,7 @@ class StyleController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
-        return view('admin.style.edit')->with('style', $style);
+        return view('admin.styles.edit')->with('style', $style);
         //
     }
 
@@ -138,10 +138,10 @@ class StyleController extends Controller
 
         ]);
 
-        return to_route('admin.style.show', $style);
+        return to_route('admin.styles.show', $style);
 
 
-        return to_route('admin.style.show', $style)->with('success', 'style updated successfully');
+        return to_route('admin.styles.show', $style)->with('success', 'style updated successfully');
     }
 
     /**
@@ -156,7 +156,7 @@ class StyleController extends Controller
         $user->authorizeRoles('admin');
         $style->arts()->delete();
         $style->delete();
-        return to_route('admin.style.index')->with('success', 'Style successfully deleted ');
+        return to_route('admin.styles.index')->with('success', 'Style successfully deleted ');
 
         //
     }
