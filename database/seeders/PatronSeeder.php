@@ -15,6 +15,8 @@ class PatronSeeder extends Seeder
      */
     public function run()
     {
+        //here art factory called creating instances of the data required in corrosponding factory
+
         Patron::factory()
             ->times(3)
             ->hasArts(4)
