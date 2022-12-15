@@ -17,7 +17,8 @@ class StyleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            //Factory is used to create fake data using the model through faker
+
             'name' => $this->faker->text(20),
             'description' => $this->faker->text(20),
         ];

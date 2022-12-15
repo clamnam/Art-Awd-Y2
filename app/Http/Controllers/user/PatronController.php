@@ -56,6 +56,7 @@ class PatronController extends Controller
     {
         $user = Auth::user();
 
+        // // if your not the associate user for the art piece  give error
 
         if (!Auth::id()) {
             return abort(403);

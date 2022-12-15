@@ -19,7 +19,7 @@
             </div>
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-
+                    {{-- puts the data from the clicked on patron on the page --}}
                     <h2 class=" font-bold text-4xl"> {{ $patron->name }}</h2>
                     <p class="mt-2">
                         {{ $patron->address }}

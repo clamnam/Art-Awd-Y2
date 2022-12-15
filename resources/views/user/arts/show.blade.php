@@ -30,6 +30,7 @@
                     </p>
 
                     <p class=""><span class="font-bold">Patron : </span> {{ $art->patron->name }}</p>
+                    {{-- shows styles for the art piece --}}
                     @foreach ($art->style as $style)
                         <tr>
                             <td>

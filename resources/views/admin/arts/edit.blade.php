@@ -23,6 +23,9 @@
                     <x-input type="text" field="artist" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist', $art->artist)"></x-input>
 
+
+                    {{-- foreach that creates drop down for patrons --}}
+
                     <div class="form-group">
                         <label for="patron">Patron</label>
                         <select name="patron_id">
@@ -34,6 +37,8 @@
                             @endforeach
                         </select>
                     </div>
+                    {{-- foreach that creates checkboxes for every style --}}
+
                     <div class="form-group">
                         <label for="styles"><strong>Art Styles</strong></label>
                         @foreach ($styles as $style)
@@ -42,6 +47,7 @@
                             {{ $style->name }}
                         @endforeach
                     </div>
+                    {{-- image input --}}
                     <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"
                         field="art_image">
                         :value="@old('art_image', $filename)">

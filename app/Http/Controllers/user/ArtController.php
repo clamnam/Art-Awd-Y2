@@ -20,6 +20,8 @@ class ArtController extends Controller
     {
         // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
         $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        //  eager load art with the patron and styles data
+
         $arts = Art::with('patron')
             ->with('style')
             ->get();
@@ -92,7 +94,7 @@ class ArtController extends Controller
      */
     public function show(Art $art)
     {
-        //if the id of the user who generated does not match the current user forbid access
+        // // if your not the associate user for the art piece  give error
         if ($art->user_id != Auth::id()) {
             return abort(403);
         }

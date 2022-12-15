@@ -17,6 +17,8 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+
+    // all change home route depending on user role
     public function index(Request $request)
     {
         $user = Auth::user();

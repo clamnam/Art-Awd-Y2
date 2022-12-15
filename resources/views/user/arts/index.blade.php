@@ -18,23 +18,25 @@
             <x-alert-success>
                 {{ session('success') }}
             </x-alert-success>
+            {{-- puts all the art pieces on the page --}}
             @forelse ($arts as $art)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                     {{-- Brings you to the show page with a link in the title --}}
-                    <a href="{{ route('user.arts.show', $art) }}">{{ $art->title }}</a>
+                    <a href="{{ route('user.arts.show', $art) }}">{{ $art->title }}
 
-                    <p class="mt-2">
-                        {{ $art->description }}
-                        <br>
-                        {{ $art->artist }}
+                        <p class="mt-2">
+                            {{ $art->description }}
+                            <br>
+                            {{ $art->artist }}
 
-                        {{ $art->genre }}
+                            {{ $art->genre }}
 
 
-                    </p>
-                    {{-- diff for humans changes the db format of date to a more readable format --}}
-                    <span class="block mt-4 text-sm opacity-70">{{ $art->updated_at->diffForHumans() }}</span>
+                        </p>
 
+                        {{-- diff for humans changes the db format of date to a more readable format --}}
+                        <span class="block mt-4 text-sm opacity-70">{{ $art->updated_at->diffForHumans() }}</span>
+                    </a>
                 </div>
 
             @empty

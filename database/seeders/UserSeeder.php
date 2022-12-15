@@ -18,6 +18,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
+        // manually insert users and admin accounts and hashes the pw's so they're not in plain text within db.
+
+
         $role_admin = Role::where('name', 'admin')->first();
         $role_user = Role::where('name', 'user')->first();
 

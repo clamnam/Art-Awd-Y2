@@ -35,12 +35,15 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
+// routes for the index through home controller verrifying the user/admin status of the user.
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/home/patrons', [App\Http\Controllers\HomeController::class, 'patronIndex'])->name('home.patron.index');
 Route::get('/home/styles', [App\Http\Controllers\HomeController::class, 'styleIndex'])->name('home.style.index');
 
+// this prevents users from accessing methods exclusive to admins
 Route::resource('/admin/arts', AdminArtController::class)->middleware(['auth'])->names('admin.arts');
 Route::resource('/user/arts', UserArtController::class)->middleware(['auth'])->names('user.arts')->only(['index', 'show']);
+
 Route::resource('/admin/patrons', AdminPatronController::class)->middleware(['auth'])->names('admin.patrons');
 Route::resource('/user/patrons', UserPatronController::class)->middleware(['auth'])->names('user.patrons')->only(['index', 'show']);
 

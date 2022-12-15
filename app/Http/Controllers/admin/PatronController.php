@@ -21,7 +21,7 @@ class PatronController extends Controller
     {
         $user = Auth::user();
 
-
+        //gets all patrons from db
         $patrons = Patron::all();
         return view('admin.patrons.index')->with('patrons', $patrons);
         //
@@ -37,7 +37,7 @@ class PatronController extends Controller
         //
         $user = Auth::user();
 
-
+        //  gets the patronn clicked on and puts it in the form
         // $patrons = Patron::all();
         return view('admin.patrons.create')->with('patron', $patron);
 
@@ -55,7 +55,7 @@ class PatronController extends Controller
     {
         $user = Auth::user();
 
-        //makes each field required, if it does not the form will fail
+        //makes each field required, if it does not the form wont work
         $request->validate([
             'name' => 'required',
             'address' => 'required'
@@ -85,12 +85,11 @@ class PatronController extends Controller
         //
         $user = Auth::user();
 
-
+        //makes sure youre the correct user
         if (!Auth::id()) {
             return abort(403);
         }
-
-        //this function is used to get a patron by the ID.
+        //puts the clicked on patron on the show page
         return view('admin.patrons.show')->with('patron', $patron);
     }
 
@@ -126,13 +125,15 @@ class PatronController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+        //makes each field required, if it does not the form wont work
+
         $request->validate([
             'name' => 'required|max:120',
             'address' => 'required'
 
         ]);
 
-        //insert and overwrite data in db
+        //insert acquired data into db
         $patron->update([
             'name' => $request->name,
             'address' => $request->address,
@@ -154,7 +155,7 @@ class PatronController extends Controller
     public function destroy(Patron $patron)
     {
         $user = Auth::user();
-
+        //deletes from db and the relation to others
         $patron->arts()->delete();
         $patron->delete();
         return to_route('admin.patrons.index')->with('success', 'Patron successfully deleted ');

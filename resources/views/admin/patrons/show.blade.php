@@ -27,6 +27,7 @@
                 </div>
                 <div class="flex">
                     <a class="items-end btn-link" href="{{ route('admin.patrons.edit', $patron) }}">Edit patron</a>
+                    {{-- goes through delete function of patron controller to delete.blade.php --}}
 
                     <form action="{{ route('admin.patrons.destroy', $patron) }}" method="post">
                         @method('delete')

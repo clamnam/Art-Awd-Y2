@@ -17,6 +17,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        //manually inserting two roles "admin" and "user"
+
         $role_admin = new Role();
         $role_admin->name = 'admin';
         $role_admin->description = 'An administrator user ';

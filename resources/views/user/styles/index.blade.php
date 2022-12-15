@@ -15,18 +15,20 @@
             <x-alert-success>
                 {{ session('success') }}
             </x-alert-success>
+            {{-- puts all the patrons on the page --}}
+
             @forelse ($styles as $style)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                    {{-- Brings you to the show page with a link in the title --}}
-                    <a href="{{ route('user.styles.show', $style) }}">{{ $style->name }}</a>
+                    {{-- Brings you to the show page with this data --}}
+                    <a href="{{ route('user.styles.show', $style) }}">{{ $style->name }}
 
-                    <p class="mt-2">
-                        {{ $style->description }}
+                        <p class="mt-2">
+                            {{ $style->description }}
 
 
 
-                    </p>
-
+                        </p>
+                    </a>
                 </div>
 
             @empty

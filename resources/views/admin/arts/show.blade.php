@@ -51,10 +51,12 @@
             </div>
             <div class="flex">
                 <a class="items-end btn-link" href="{{ route('admin.arts.edit', $art) }}">Edit art</a>
+                {{-- goes through destroy function of art controller deleting column in table --}}
 
                 <form action="{{ route('admin.arts.destroy', $art) }}" method="post">
                     @method('delete')
                     @csrf
+
                     {{-- Allows you to delete with an "are you sure?" prompt --}}
                     <button type="submit" class="btn-link bg-red-600 ml-4"
                         onclick="return confirm('Are you sure you wish to delete this art?')">Delete piece</button>

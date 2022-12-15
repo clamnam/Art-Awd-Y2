@@ -24,13 +24,12 @@ class ArtController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        //  eager load art with the patron and styles data
         $arts = Art::with('patron')
             ->with('style')
             ->get();
-        $styles = Style::get();
-        // acquire the table data when the user id of the user matches user_id values in the user column .also make it into 5 pages
-        // $arts = Art::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        // $styles = Style::get();
+
         return view('admin.arts.index')->with('arts', $arts);
     }
 
@@ -42,7 +41,7 @@ class ArtController extends Controller
     public function create()
     {
         $user = Auth::user();
-
+        //get all the data for these as theyre going into the selection inputs
         $patrons = Patron::all();
         $styles = Style::all();
         return view('admin.arts.create')->with('patrons', $patrons)->with('styles', $styles);
@@ -57,7 +56,7 @@ class ArtController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        //makes each field required, if it does not the form will fail
+        //makes each field required, if it does not the form inputs will give error
         $request->validate([
             'title' => 'required|max:120',
             'description' => 'required',
@@ -67,7 +66,7 @@ class ArtController extends Controller
             'artist' => 'required',
             'art_image' => 'file|image'
         ]);
-        //images
+        //images storage gives file unique name and stores it
         $art_image = $request->file('art_image');
         $extension = $art_image->getClientOriginalExtension();
         $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
@@ -102,12 +101,11 @@ class ArtController extends Controller
     public function show(Art $art)
     {
         $user = Auth::user();
+        // // if your not the associate user for the art piece  give error
+        // if (!Auth::id()) {
+        //     return abort(403);
+        // }
 
-        if (!Auth::id()) {
-            return abort(403);
-        }
-
-        //this function is used to get a art by the ID.
         return view('admin.arts.show')->with('art', $art);
     }
     /**
@@ -122,9 +120,10 @@ class ArtController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+        //get all the data for these as theyre going into the selection inputs
         $styles = Style::all();
-
         $patrons = Patron::all();
+
         return view('admin.arts.edit')->with('art', $art)->with('patrons', $patrons)->with('styles', $styles);
     }
     public function update(Request $request, Art $art)
@@ -133,6 +132,10 @@ class ArtController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+
+
+        //makes each field required, if it does not the form inputs will give error
+
         $request->validate([
             'title' => 'required|max:120',
             'description' => 'required',
@@ -142,13 +145,15 @@ class ArtController extends Controller
             'artist' => 'required',
             'art_image' => 'required'
         ]);
+
+        //images storage gives file unique name and stores it
+
         $art_image = $request->file('art_image');
-        //the filename needs to be unique
         $extension = $art_image->getClientOriginalExtension();
         $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
         $path = $art_image->storeAs('public/images', $filename);
 
-        //insert and overwrite data in db
+        //insert acquired data into db
         $art->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -173,6 +178,7 @@ class ArtController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+        //function deletes from db
         $art->delete();
         return to_route('admin.arts.index')->with('success', 'Art successfully deleted ');
     }

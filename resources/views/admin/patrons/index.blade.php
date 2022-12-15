@@ -11,7 +11,7 @@
 
 
 
-            {{-- brings you to create.blade.php where you can add a new piece --}}
+            {{-- goes through create function of patron controller to create.blade.php --}}
             <a href="{{ route('admin.patrons.create') }}" class="btn-lg btn-link mt-6">Add a patron</a>
             {{-- success printed if you add piece and return to this page --}}
             <x-alert-success>
@@ -25,12 +25,8 @@
                     <p class="mt-2">
                         {{ $patron->address }}
                         <br>
-
-
                     </p>
-
                 </div>
-
             @empty
                 <p>No Patrons</p>
             @endforelse

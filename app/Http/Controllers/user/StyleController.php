@@ -31,10 +31,10 @@ class StyleController extends Controller
     public function create(Style $style)
     {
         //
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $styles = Style::all();
-        return view('user.styles.create')->with('style', $style);
+        // $styles = Style::all();
+        // return view('user.styles.create')->with('style', $style);
 
 
         //
@@ -78,6 +78,7 @@ class StyleController extends Controller
     {
         //
         $user = Auth::user();
+        // // if your not the associate user for the art piece  give error
 
         if (!Auth::id()) {
             return abort(403);

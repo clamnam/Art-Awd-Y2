@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Art;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,8 +16,7 @@ class ArtSeeder extends Seeder
 
     public function run()
     {
-        // Seeder is used to create fake data by using table name
-        //here it creates 50 sets of fake data
+        //here art factory called creating instances of the data required in corrosponding factory
         Art::factory()->times(50)->create();
     }
 }

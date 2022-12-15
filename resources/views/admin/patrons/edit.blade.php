@@ -19,10 +19,6 @@
                         autocomplete="off" :value="@old('address', $patron->address)"></x-input>
 
 
-
-
-
-
                     <x-button class="mt-6">Save Patron </x-button>
                 </form>
 

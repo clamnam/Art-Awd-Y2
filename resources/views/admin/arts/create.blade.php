@@ -13,7 +13,7 @@
 
         @endforeach --}}
                 {{-- form that takes in data and through store function in ArtController inserts the data into the database --}}
-                {{-- enctype is a method of encrypting the form data --}}
+                {{-- enctype is a way to encrypt the form data --}}
                 <form action="{{ route('admin.arts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <x-input type="text" field="title" name="title" placeholder="Title" class="w-full"
@@ -28,6 +28,8 @@
                         autocomplete="off" :value="@old('genre')"></x-input>
                     <x-input type="text" field="artist" name="artist" placeholder="Artist" class="w-full"
                         autocomplete="off" :value="@old('artist')"></x-input>
+
+                    {{-- foreach that creates drop down for patrons --}}
                     <div class="form-group">
                         <label for="patron">Patron</label>
                         <select name="patron_id">
@@ -39,6 +41,7 @@
                             @endforeach
                         </select>
                     </div>
+                    {{-- foreach that creates checkboxes for every style --}}
                     <div class="form-group">
                         <label for="styles"><strong>Art Styles</strong></label>
                         @foreach ($styles as $style)
@@ -46,7 +49,7 @@
                             {{ $style->name }}
                         @endforeach
                     </div>
-
+                    {{-- image input --}}
                     <x-input type="file" name="art_image" placeholder="Art Piece" class="w-full mt-6"
                         field="art_image" :value="@old('art_image', $filename)">
 

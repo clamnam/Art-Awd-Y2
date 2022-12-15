@@ -18,11 +18,12 @@ class StyleSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //here style factory called creating instances of the data required in corrosponding factory
+
         Style::factory()
             ->times(3)
             ->create();
-
+        // implants one of the styles id into the art tables fk style_id
         foreach (Art::all() as $art) {
             $styles = Style::inRandomOrder()->take(rand(1, 3))->pluck('id');
             $art->style()->attach($styles);

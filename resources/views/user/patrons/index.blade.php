@@ -15,18 +15,19 @@
             <x-alert-success>
                 {{ session('success') }}
             </x-alert-success>
+            {{-- puts all the patrons on the page --}}
             @forelse ($patrons as $patron)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                     {{-- Brings you to the show page with a link in the title --}}
-                    <a href="{{ route('user.patrons.show', $patron) }}">{{ $patron->name }}</a>
+                    <a href="{{ route('user.patrons.show', $patron) }}">{{ $patron->name }}
 
-                    <p class="mt-2">
-                        {{ $patron->address }}
-                        <br>
+                        <p class="mt-2">
+                            {{ $patron->address }}
+                            <br>
 
 
-                    </p>
-
+                        </p>
+                    </a>
                 </div>
 
             @empty

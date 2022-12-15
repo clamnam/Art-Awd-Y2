@@ -19,7 +19,7 @@ class StyleController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        // load up all the data
         $styles = Style::all();
         return view('admin.styles.index')->with('styles', $styles);
         //
@@ -81,6 +81,8 @@ class StyleController extends Controller
         //
         $user = Auth::user();
 
+        //makes sure youre the correct user
+
         if (!Auth::id()) {
             return abort(403);
         }
@@ -119,13 +121,16 @@ class StyleController extends Controller
         // if ($art->user_id != Auth::id()) {
         //     return abort(403);
         // }
+
+        //makes each field required, if it does not the form wont work
+
         $request->validate([
             'name' => 'required|max:120',
             'description' => 'required'
 
         ]);
 
-        //insert and overwrite data in db
+        //insert acquired data into db
         $style->update([
             'name' => $request->name,
             'description' => $request->description,

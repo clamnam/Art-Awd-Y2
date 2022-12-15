@@ -11,7 +11,7 @@
 
 
 
-            {{-- brings you to create.blade.php where you can add a new piece --}}
+            {{-- goes through create function of art controller to create.blade.php --}}
             <a href="{{ route('admin.arts.create') }}" class="btn-lg btn-link mt-6">Add an art piece</a>
             {{-- success printed if you add piece and return to this page --}}
             <x-alert-success>
@@ -19,23 +19,23 @@
             </x-alert-success>
             @forelse ($arts as $art)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                    {{-- Brings you to the show page with a link in the title --}}
-                    <a href="{{ route('admin.arts.show', $art) }}">{{ $art->title }}</a>
+                    {{-- goes through show function of art controller to show.blade.php --}}
+                    <a href="{{ route('admin.arts.show', $art) }}">{{ $art->title }}
 
-                    <p class="mt-2">
-                        {{ $art->description }}
-                        <br>
-                        {{ $art->artist }}
-                        <br>
-                    <p class="font-bold"> genre : {{ $art->genre }}
-                    </p>
-                    <p class="font-bold"> patron : {{ $art->patron->name }}
-                    </p>
+                        <p class="mt-2">
+                            {{ $art->description }}
+                            <br>
+                            {{ $art->artist }}
+                            <br>
+                            <p class="font-bold"> genre : {{ $art->genre }}
+                            </p>
+                            <p class="font-bold"> patron : {{ $art->patron->name }}
+                            </p>
 
-                    </p>
-                    {{-- diff for humans changes the db format of date to a more readable format --}}
-                    <span class="block mt-4 text-sm opacity-70">{{ $art->updated_at->diffForHumans() }}</span>
-
+                        </p>
+                        {{-- diff for humans changes the db format of date to a more readable format --}}
+                        <span class="block mt-4 text-sm opacity-70">{{ $art->updated_at->diffForHumans() }}</span>
+                    </a>
                 </div>
 
             @empty
